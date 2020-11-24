@@ -25,7 +25,7 @@ app.use(bodyparser({
 app.use(json())
 // 打印日志
 app.use(logger())
-// 静态化资源
+// 静态化资源 可以通过地址访问public下文件
 app.use(require('koa-static')(__dirname + '/public'))
 
 // 注册ejs

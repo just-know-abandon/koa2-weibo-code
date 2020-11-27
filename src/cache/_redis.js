@@ -1,5 +1,5 @@
 /**
- * @description 连接 redis 的方法 get set
+ * @description 连接 redis 的方法 get set   文件名前带 _ 代表内部文件 自己用不对外公开
  */
 
 const redis = require('redis')

@@ -43,7 +43,7 @@ app.use(session({
     httpOnly: true, // 仅允许在session端修改，客户端不允许
     maxAge: 24 * 60 * 60 * 1000 // cookie过期时间 一天 ms
   },
-  // ttl: 24 * 60 * 60 * 1000, // redis 过期时间 session工具默认，不需要手动添加
+  // ttl: 24 * 60 * 60 * 1000, // redis 过期时间 session工具默认maxAge时间，不需要手动添加
   store: redisStore({
     // all: '127.0.0.1:6379'  从 ./conf/db - REDIS_CONF中引入
     all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
@@ -66,6 +66,6 @@ app.use(users.routes(), users.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
-});
+})
 
 module.exports = app

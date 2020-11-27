@@ -8,7 +8,7 @@ const ENV = process.env.NODE_ENV
 module.exports = {
   isDev: ENV === 'dev',
   notDev: ENV !== 'dev',
-  isPord: ENV === 'production',
+  isProd: ENV === 'production',
   notPord: ENV !== 'production',
   isTest: ENV === 'test',
   notTest: ENV !== 'test'

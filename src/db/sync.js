@@ -5,7 +5,7 @@
 
 const seq = require('./seq')
 
-// require('./model')
+require('./model/index')
 
 // 测试连接
 seq.authenticate().then(() => {
@@ -17,7 +17,7 @@ seq.authenticate().then(() => {
 // 执行同步
 // force强制执行覆盖原有得同名表格
 // seq.sync({ force: true })
-seq.sync().then(() => {
+seq.sync({ force: true }).then(() => {
   console.log('sync ok')
   process.exit()
 })

@@ -5,9 +5,6 @@
 const crypto = require('crypto')
 const { CRYPTO_SECRET_KEY } = require('../conf/secretKeys')
 
-// 密钥
-// const SECRET_KEY = 'CRYPTO_SECRET_KEY'
-
 /**
  * md 加密
  * hex 16进制

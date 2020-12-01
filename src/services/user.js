@@ -6,7 +6,7 @@ const { User } = require('../db/model/index')
 const { formatUser } = require('./_format')
 
 /**
- * 获取用户信息
+ * 获取用户信息(注册，验证是否存在，登录)通用
  * @param {string} userName 用户名
  * @param {string} password 密码
  */

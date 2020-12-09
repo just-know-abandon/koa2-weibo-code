@@ -1,3 +1,4 @@
+const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -7,6 +8,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
+const koaStatic = require('koa-static')
 
 const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
@@ -15,6 +17,7 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 // 路由
 const index = require('./routes/index')
 // const users = require('./routes/_users')
+const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
 const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
@@ -40,7 +43,9 @@ app.use(json())
 // 打印日志
 app.use(logger())
 // 静态化资源 可以通过地址访问public下文件
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(__dirname + '/public'))
+// 处理uploadFiles文件夹图片
+app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 
 // 注册ejs
 app.use(views(__dirname + '/views', {
@@ -67,6 +72,7 @@ app.use(session({
 // routes
 app.use(index.routes(), index.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())
+app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 // 404路由必须放最下

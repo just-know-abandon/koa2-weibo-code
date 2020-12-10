@@ -3,9 +3,10 @@
  */
 
 const router = require('koa-router')()
-const { isExist, register, login } = require('../../controller/user')
+const { isExist, register, login, changeInfo } = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
+const { loginCheck } = require('../../middlewares/loginCheck')
 
 router.prefix('/api/user')
 
@@ -32,6 +33,13 @@ router.post('/login', async (ctx, next) => {
   const { userName, password } = ctx.request.body
   // controller
   ctx.body = await login(ctx, userName, password)
+})
+
+// 修改个人信息
+router.patch('/changeInfo', loginCheck, genValidator(userValidate), async (ctx, next) => {
+  const { nickName, city, picture } = ctx.request.body
+  // controller
+  ctx.body = await changeInfo(ctx, { nickName, city, picture })
 })
 
 module.exports = router

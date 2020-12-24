@@ -1,6 +1,6 @@
 <%- include('layout/header', { title: '微博 - 个人主页', isNav: true, list: true })%>
 
-<div class="container margin-top-20">
+<div class="container margin-top-20"  style="margin-top: 20px;">
     <div class="row">
         <!-- 左侧 -->
         <div class="col-8">
@@ -42,12 +42,21 @@
                 });%>
             </div>
 
-            <!-- 粉丝 -->
-            <%- include('widgets/fans', {
-                count: userData.fansData.count,
-                userList: userData.fansData.list
-            })%>
+            <div style="margin-top: 20px;">
+                <!-- 粉丝 -->
+                <%- include('widgets/fans', {
+                    count: userData.fansData.count,
+                    userList: userData.fansData.list
+                })%>
+            </div>
 
+            <div style="margin-top: 60px;">
+                <!-- 关注 -->
+                <%- include('widgets/followers', {
+                    count: userData.followersData.count,
+                    userList: userData.followersData.list
+                })%>
+            </div>
         </div> <!-- 右侧结束 -->
     </div>
 </div>
